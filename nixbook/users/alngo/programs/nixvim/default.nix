@@ -13,6 +13,7 @@
 			tabstop = 2;
 			hlsearch = true;
 			incsearch = true;
+                        encoding = "utf-8";
 		};
 
 		extraPackages = with pkgs; [

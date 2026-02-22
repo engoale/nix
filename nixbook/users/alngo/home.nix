@@ -32,7 +32,8 @@
           "XF86KbdBrightnessDown" = "exec echo not implemented";
 
           # Lock
-          "${modifier}+l" = "exec swaylock";
+	  # TODO: Find a suitable shortcut
+          # "${modifier}+"l= "exec swaylock";
         };
       };
     };
@@ -41,6 +42,10 @@
       [
         # Font
         cascadia-code
+	noto-fonts
+	noto-fonts-cjk-sans
+	noto-fonts-color-emoji
+	babelstone-han
         wl-clipboard
       ];
 

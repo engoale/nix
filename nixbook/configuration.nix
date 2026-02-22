@@ -31,6 +31,11 @@
   services.xserver.xkb.layout = "us";
   services.xserver.xkb.options = "ctrl:nocaps";
 
+  # Getty
+  services.getty = {
+    greetingLine = "Greeting!";
+  };
+
   # Console keymap
   console.useXkbConfig = true;
 
@@ -78,6 +83,10 @@
   environment.shellAliases = {
     switch = "sudo nixos-rebuild switch --flake /etc/nixos#nixbook";
   };
+
+  environment.loginShellInit = ''
+      [[ "$(tty)" == /dev/tty1 ]] && sway
+  '';
 
   # Security x Sway
   security.polkit.enable = true;
