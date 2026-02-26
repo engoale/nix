@@ -1,11 +1,11 @@
-{ pkgs, inputs,  ... }:
+{ pkgs, inputs, ... }:
 {
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = { inherit inputs; };
 
-    users.alngo = { 
+    users.alngo = {
       imports = [
         inputs.nixvim.homeModules.nixvim
         ./alngo/home.nix

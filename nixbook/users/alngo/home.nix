@@ -1,11 +1,19 @@
-{ config, lib, pkgs, inputs, ... }:
 {
-    wayland.windowManager.sway = {
-      enable = true;
-      wrapperFeatures.gtk = true; # Fixes common issues with GTK 3 apps
-      config = let
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+{
+  wayland.windowManager.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true; # Fixes common issues with GTK 3 apps
+    config =
+      let
         modifier = config.wayland.windowManager.sway.config.modifier;
-      in {
+      in
+      {
         modifier = "Mod4";
         input = {
           "*" = {
@@ -17,11 +25,11 @@
           "XF86AudioRaiseVolume" = "exec swayosd-client --output-volume raise";
           "XF86AudioLowerVolume" = "exec swayosd-client --output-volume lower";
           "XF86AudioMute" = "exec swayosd-client --output-volume mute-toggle";
-            
+
           # Brightness Controls
           "XF86MonBrightnessUp" = "exec swayosd-client --brightness raise";
           "XF86MonBrightnessDown" = "exec swayosd-client --brightness lower";
-            
+
           # Media Player Controls
           "XF86AudioPlay" = "exec swayosd-client --playerctl play-pause";
           "XF86AudioNext" = "exec swayosd-client --playerctl next";
@@ -32,36 +40,36 @@
           "XF86KbdBrightnessDown" = "exec echo not implemented";
 
           # Lock
-	  # TODO: Find a suitable shortcut
+          # TODO: Find a suitable shortcut
           # "${modifier}+"l= "exec swaylock";
         };
       };
-    };
+  };
 
-    home.packages = with pkgs;
-      [
-        # Font
-        cascadia-code
-	noto-fonts
-	noto-fonts-cjk-sans
-	noto-fonts-color-emoji
-	babelstone-han
-        wl-clipboard
-      ];
+  home.packages = with pkgs; [
+    # Font
+    cascadia-code
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-color-emoji
+    babelstone-han
+    wl-clipboard
+    file
+  ];
 
-    fonts.fontconfig.enable = true;
+  fonts.fontconfig.enable = true;
 
-    programs.swaylock.enable = true;
+  programs.swaylock.enable = true;
 
-    services.swayosd = {
-      enable = true;
-      # May be from 0.0 - 1.0.
-      topMargin = 0.9;
-      # Custom stylesheet file.
-      #stylePath = "/etc/xdg/swayosd/style.css";
-    };
+  services.swayosd = {
+    enable = true;
+    # May be from 0.0 - 1.0.
+    topMargin = 0.9;
+    # Custom stylesheet file.
+    #stylePath = "/etc/xdg/swayosd/style.css";
+  };
 
-    services.swayidle =
+  services.swayidle =
     let
       # Lock command
       lock = "${pkgs.swaylock}/bin/swaylock --daemonize";
@@ -105,9 +113,9 @@
       ];
     };
 
-    programs.firefox.enable = true;
-    programs.nixvim = {
-      enable = true;
-      imports = [ ./programs/nixvim ];
-    };
+  programs.firefox.enable = true;
+  programs.nixvim = {
+    enable = true;
+    imports = [ ./programs/nixvim ];
+  };
 }

@@ -14,18 +14,25 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = inputs@{ self, nixpkgs, disko, home-manager, nixvim }:
-  {
-    nixosConfigurations.nixbook = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
-      system = "x86_64-linux";
-      modules = [
-        ./nixbook/configuration.nix
-        ./nixbook/users
-        disko.nixosModules.disko
-        home-manager.nixosModules.home-manager
-        nixvim.nixosModules.nixvim
-      ];
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      disko,
+      home-manager,
+      nixvim,
+    }:
+    {
+      nixosConfigurations.nixbook = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        system = "x86_64-linux";
+        modules = [
+          ./nixbook/configuration.nix
+          ./nixbook/users
+          disko.nixosModules.disko
+          home-manager.nixosModules.home-manager
+          nixvim.nixosModules.nixvim
+        ];
+      };
     };
-  };
 }

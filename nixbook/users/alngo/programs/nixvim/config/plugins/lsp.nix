@@ -1,12 +1,12 @@
 { ... }:
 {
-	diagnostic.settings.virtual_text = true;
+  diagnostic.settings.virtual_text = true;
   plugins = {
     lsp-lines.enable = true;
     lsp-format = {
-		  enable = true;
-			lspServersToEnable = "all";
-		};
+      enable = true;
+      lspServersToEnable = "all";
+    };
     lsp = {
       enable = true;
       inlayHints = true;
@@ -17,6 +17,7 @@
         marksman.enable = true;
         pyright.enable = true;
         nixd.enable = true;
+        svelte.enable = true;
       };
     };
     rustaceanvim.enable = true;

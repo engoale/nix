@@ -2,7 +2,12 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   nix.settings = {
@@ -12,11 +17,11 @@
     ];
   };
 
-  imports =
-    [ # Include the results of the hardware scan.
-      ./disko-config.nix
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./disko-config.nix
+    ./hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -60,7 +65,11 @@
   users.users.alngo = {
     isNormalUser = true;
     description = "Alex Ngo";
-    extraGroups = [ "wheel" "networkmanager" "video" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "video"
+    ]; # Enable ‘sudo’ for the user.
   };
 
   # Disable root login
@@ -69,14 +78,14 @@
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
-    vim 
+    vim
     wget
     git
   ];
 
   # List services that you want to enable:
   # yubico.enable = true;
-  
+
   # Environment
   environment.variables.EDITOR = "vim";
 
@@ -85,12 +94,12 @@
   };
 
   environment.loginShellInit = ''
-      [[ "$(tty)" == /dev/tty1 ]] && sway
+    [[ "$(tty)" == /dev/tty1 ]] && sway
   '';
 
   # Security x Sway
   security.polkit.enable = true;
-  security.pam.services.swaylock = {};
+  security.pam.services.swaylock = { };
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
@@ -117,4 +126,3 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
 }
-
