@@ -80,16 +80,16 @@
       enable = true;
       timeouts = [
         {
-          timeout = 20;
+          timeout = 200;
           command = lock;
         }
         {
-          timeout = 25;
+          timeout = 250;
           command = display "off";
           resumeCommand = display "on";
         }
         {
-          timeout = 30;
+          timeout = 300;
           command = "${pkgs.systemd}/bin/systemctl suspend";
         }
       ];

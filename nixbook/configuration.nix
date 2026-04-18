@@ -23,10 +23,13 @@
     ./hardware-configuration.nix
   ];
 
+  # Allow unfree software for proprietary drivers
+  nixpkgs.config.allowUnfree = true;
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
+  
   networking.hostName = "nixbook";
   networking.hostId = "3849792f";
   networking.networkmanager.enable = true;
@@ -52,6 +55,13 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  services.ipp-usb.enable = true;
+  services.printing.drivers = with pkgs; [
+    pkgs.gutenprint
+    pkgs.gutenprintBin
+  ];
+
+  # Enable camera
 
   # Enable sound.
   services.pulseaudio.enable = true;
