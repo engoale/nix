@@ -118,4 +118,6 @@
     enable = true;
     imports = [ ./programs/nixvim ];
   };
+
+  programs.direnv.enable = true;
 }

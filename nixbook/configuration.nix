@@ -61,6 +61,9 @@
     pkgs.gutenprintBin
   ];
 
+  # Enable scanner
+  hardware.sane.enable = true;
+
   # Enable camera
 
   # Enable sound.
@@ -79,6 +82,8 @@
       "wheel"
       "networkmanager"
       "video"
+      "scanner"
+      "lp"
     ]; # Enable ‘sudo’ for the user.
   };
 
